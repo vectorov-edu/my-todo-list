@@ -1,0 +1,11 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "title": "todo 1",
+            "body": "body of todo 1",
+            "creatingDate": "",
+            "lastEditingDate": ""
+        }
+    ]
+}
