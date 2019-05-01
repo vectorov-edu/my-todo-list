@@ -1,0 +1,16 @@
+<button class="btn btn-info">Add</button>
+<button class="btn btn-info" (click)="getTodoList()">Refresh</button>
+
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <app-todo-entity *ngFor="let todo of todoList">
+    </app-todo-entity>
+  </tbody>
+</table>

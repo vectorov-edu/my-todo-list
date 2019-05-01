@@ -3,12 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import {HttpClientModule} from '@angular/common/http';
+import { TodolistComponent } from './components/todolist/todolist.component';
+import { TodoEntityComponent } from './components/todo-entity/todo-entity.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodolistComponent,
+    TodoEntityComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
