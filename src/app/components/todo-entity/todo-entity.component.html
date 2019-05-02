@@ -1,8 +1,6 @@
-<tr>
-  <th scope="row">todoEntity.Id</th>
-  <td scope="col">todoEntity.Title</td>
-  <td scope="col">
-    <button>edit</button>
-    <button>delete</button>
-  </td>
-</tr>
+<td>{{todoEntity.id}}</td>
+<td>{{todoEntity.title}}</td>
+<td>
+  <button [routerLink]="['edit', todoEntity.id]">edit</button>
+  <button [routerLink]="['delete', todoEntity.id]">delete</button>
+</td>

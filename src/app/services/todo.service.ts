@@ -21,6 +21,19 @@ export class TodoService {
       .pipe(
         map((response: TodoModel[]) => {
           return response.splice(0, 20);
+        }),
+        map((response) => {
+          const resultArr: TodoModel[] = [];
+          response.forEach(elem => {
+            resultArr.push(new TodoModel(
+              elem.id,
+              elem.title,
+              elem.body,
+              elem.creatingDate,
+              elem.lastEditingDate
+            ));
+          });
+          return resultArr;
         })
       );
   }

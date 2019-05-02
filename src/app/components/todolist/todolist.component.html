@@ -10,7 +10,6 @@
     </tr>
   </thead>
   <tbody>
-    <app-todo-entity *ngFor="let todo of todoList">
-    </app-todo-entity>
+    <tr app-todo-entity *ngFor="let todo of todoList" [todoEntity]="todo"></tr>
   </tbody>
 </table>
