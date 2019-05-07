@@ -2,19 +2,19 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">ID:</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" [(ngModel)]="todo.id">
+      <input type="text" readonly class="form-control-plaintext" [(ngModel)]="todo.id" name="id">
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" [(ngModel)]="todo.title">
+      <input type="text" class="form-control" [(ngModel)]="todo.title" name="title">
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Description</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" [(ngModel)]="todo.body">
+      <input type="text" class="form-control" [(ngModel)]="todo.body" name="body">
     </div>
   </div>
   <div class="form-group row">
@@ -29,5 +29,5 @@
       <label >{{todo.lastEditingDate}}</label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Apply</button>
+  <button class="btn btn-primary" (click)="apply()">Apply</button>
 </form>

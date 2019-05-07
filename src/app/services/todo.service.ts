@@ -38,19 +38,31 @@ export class TodoService {
       );
   }
 
-  public getTodoBy(id: string): TodoModel {
-    return undefined;
+  public getTodoBy(id: string): Observable<TodoModel> {
+    return this.httpClient
+      .get<TodoModel>(this.apiUrl + id)
+      .pipe(
+        map((elem) => {
+          return new TodoModel(
+              elem.id,
+              elem.title,
+              elem.body,
+              elem.creatingDate,
+              elem.lastEditingDate
+            );
+        })
+      );
   }
 
-  public addTodo(): void {
-    
+  public addTodo(todo: TodoModel): void {
+    this.httpClient.put<TodoModel>(this.apiUrl + todo.id, todo);
   }
 
-  public updateTodo(): void {
-    
+  public updateTodo(todo: TodoModel): Observable<TodoModel> {
+    return this.httpClient.patch<TodoModel>(this.apiUrl + todo.id, todo);
   }
 
-  public deleteTodoBy(id: string): void {
-    
+  public deleteTodoBy(id: string): Observable<TodoModel> {
+    return this.httpClient.delete<TodoModel>(this.apiUrl + id);
   }
 }
