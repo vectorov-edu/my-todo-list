@@ -12,6 +12,9 @@ const routes: Route[] = [
     path: "edit/:id", component: TodoEditorComponent
   },
   {
+    path: "add", component: TodoEditorComponent
+  },
+  {
     path: "delete/:id", component: TodoDeleteComponent
   }
 ]

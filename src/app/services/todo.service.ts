@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TodoModel } from 'src/models/todo.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, reduce } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class TodoService {
     return this.httpClient
       .get<TodoModel[]>(this.apiUrl)
       .pipe(
-        map((response: TodoModel[]) => {
-          return response.splice(0, 20);
-        }),
+        // map((response: TodoModel[]) => {
+        //   return response.splice(0, 20);
+        // }),
         map((response) => {
           const resultArr: TodoModel[] = [];
           response.forEach(elem => {
@@ -54,15 +54,15 @@ export class TodoService {
       );
   }
 
-  public addTodo(todo: TodoModel): void {
-    this.httpClient.put<TodoModel>(this.apiUrl + todo.id, todo);
+  public addTodo(todo: TodoModel): Observable<any> {
+    return this.httpClient.post<TodoModel>(this.apiUrl, todo);
   }
 
   public updateTodo(todo: TodoModel): Observable<TodoModel> {
     return this.httpClient.patch<TodoModel>(this.apiUrl + todo.id, todo);
   }
 
-  public deleteTodoBy(id: string): Observable<TodoModel> {
-    return this.httpClient.delete<TodoModel>(this.apiUrl + id);
+  public deleteTodoBy(id: string): Observable<any> {
+    return this.httpClient.delete(this.apiUrl + id);
   }
 }

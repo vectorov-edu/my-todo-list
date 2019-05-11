@@ -10,6 +10,8 @@ import { TodoModel } from 'src/models/todo.model';
 })
 export class TodoEditorComponent implements OnInit {
   public todo: TodoModel = new TodoModel(0, "", "", "", "");
+  public editorTitle = '';
+  private currentPath: string;
 
   constructor(
     private router: Router,
@@ -19,7 +21,17 @@ export class TodoEditorComponent implements OnInit {
 
   ngOnInit() {
     //debugger;
-    console.log(this.activatedRoute);
+    this.currentPath = this.activatedRoute.snapshot.url[0].path;
+    if(this.currentPath === 'edit') {
+      this.editorTitle = 'Editing the todo';
+      this.getTodoFromDB();
+    } else {
+      this.editorTitle = 'Adding the new todo';
+      this.getNewTodo();
+    }
+  }
+
+  private getTodoFromDB() {
     this.activatedRoute.paramMap.subscribe(
       params => {
         this.todoService.getTodoBy(params.get('id')).subscribe((todo: TodoModel) => {
@@ -30,8 +42,42 @@ export class TodoEditorComponent implements OnInit {
     );
   }
 
+  private getNewTodo() {
+    let newId = 0;
+    this.todoService
+      .getTodoList()
+      .subscribe((response) => {
+        newId = response
+          .reduce((p, v) => {
+            return (p.id > v.id ? p : v);
+          }).id;
+
+          this.todo = new TodoModel(newId + 1, '', '', '', '');
+        });
+  }
+
   public apply() {
-    this.updateDates();
+    if(this.currentPath === 'edit') {
+      this.updateTodo();
+    } else {
+      this.addTodo();
+    }
+
+  }
+  private addTodo() {
+    this.todo.creatingDate = new Date().toDateString();
+debugger;
+    this.todoService
+      .addTodo(this.todo)
+      .subscribe(
+        (response) => {
+          this.router.navigate(['']);
+        }
+      );
+  }
+
+  private updateTodo(): void {
+    this.todo.lastEditingDate = new Date().toDateString();
 
     this.todoService
       .updateTodo(this.todo)
@@ -41,9 +87,5 @@ export class TodoEditorComponent implements OnInit {
           this.router.navigate(['']);
         }
       );
-  }
-
-  private updateDates(): void {
-    this.todo.lastEditingDate = new Date().toDateString();
   }
 }

@@ -4,9 +4,7 @@
 <div mat-dialog-content>
   <p>Are you confirm your action ?</p>
 </div>
-<div>
-  <button>OK</button>
-</div>
-<div>
-  <button>Cancel</button>
-</div>
+<mat-dialog-actions>
+  <button mat-button (click)="onOkClick()">OK</button>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</mat-dialog-actions>

@@ -11,7 +11,8 @@ import { TodoEditorComponent } from './components/todo-editor/todo-editor.compon
 import { TodoRoutingModule } from './components/todo-routing/todo-routing.module';
 import { TodoDeleteComponent } from './components/todo-delete/todo-delete.component';
 import { ModalConfirmationComponent } from './components/modal-confirmation/modal-confirmation.component';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,18 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     HttpClientModule,
     TodoRoutingModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule
+  ],
+  exports: [
+    ModalConfirmationComponent
+  ],
+  entryComponents: [
+    ModalConfirmationComponent
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    { provide: MAT_DIALOG_DATA, useValue: {} },
   ],
   bootstrap: [AppComponent]
 })

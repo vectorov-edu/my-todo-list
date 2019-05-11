@@ -16,5 +16,4 @@ export class TodoEntityComponent implements OnInit {
     console.log('todoEntity = ' + this.todoEntity);
     console.log(this.todoEntity);
   }
-
 }
