@@ -40,14 +40,16 @@ export class TodoDeleteComponent implements OnInit, AfterViewInit {
 			console.log(result);	
 
 			if(result){
-				debugger;
 				this.todoService.deleteTodoBy(this.deletingId).subscribe(x => {
+					// how to avoid code duplicating
 					this.router.navigate(['']);
 				});
+			} else {
+				// how to avoid code duplicating
+				this.router.navigate(['']);
 			}
 		}, error => {
 			console.log(error);	
-		}, () => {
 		});
 		console.log(dialogRef);
 	}
