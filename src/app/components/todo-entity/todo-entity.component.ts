@@ -12,8 +12,5 @@ export class TodoEntityComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log('todoEntity = ' + this.todoEntity);
-    console.log(this.todoEntity);
-  }
+  ngOnInit() { }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, AfterContentChecked, ChangeDetectorRef } from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 import { TodoService } from 'src/app/services/todo.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./todo-delete.component.css']
 })
 export class TodoDeleteComponent implements OnInit, AfterViewInit {
-	private deletingId: string;
+	private todoId: string;
 
   constructor(
 		private dialog: MatDialog,
@@ -22,10 +22,9 @@ export class TodoDeleteComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		this.activatedRoute.paramMap.subscribe(
       params => {
-				this.deletingId = params.get('id');
+				this.todoId = params.get('id');
       }
     );
-
 	}
 
 	ngAfterViewInit(): void {
@@ -36,21 +35,22 @@ export class TodoDeleteComponent implements OnInit, AfterViewInit {
 		const dialogRef = this.dialog.open(ModalConfirmationComponent, {});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('Dialog result : ');
-			console.log(result);	
-
 			if(result){
-				this.todoService.deleteTodoBy(this.deletingId).subscribe(x => {
-					// how to avoid code duplicating
-					this.router.navigate(['']);
-				});
+				this.todoService.deleteTodoById(this.todoId).subscribe(
+					response => {
+						// how to avoid code duplicating
+						this.router.navigate(['']);
+					},
+					error => {
+						console.log(error);	
+					});
 			} else {
 				// how to avoid code duplicating
 				this.router.navigate(['']);
 			}
-		}, error => {
+		},
+		error => {
 			console.log(error);	
 		});
-		console.log(dialogRef);
 	}
 }

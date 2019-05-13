@@ -62,7 +62,7 @@ export class TodoService {
     return this.httpClient.patch<TodoModel>(this.apiUrl + todo.id, todo);
   }
 
-  public deleteTodoBy(id: string): Observable<any> {
+  public deleteTodoById(id: string): Observable<any> {
     return this.httpClient.delete(this.apiUrl + id);
   }
 }
