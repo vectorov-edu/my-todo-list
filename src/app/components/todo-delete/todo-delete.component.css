@@ -1,0 +1,7 @@
+.spinner {
+  display: table;
+  position: relative;
+  width: 0px;
+  margin: 20% auto;
+  top: calc(50% - 24px);
+}

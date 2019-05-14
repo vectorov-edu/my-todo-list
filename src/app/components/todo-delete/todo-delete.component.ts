@@ -6,11 +6,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-todo-delete',
-	template: '',
+	templateUrl: './todo-delete.component.html',
   styleUrls: ['./todo-delete.component.css']
 })
 export class TodoDeleteComponent implements OnInit, AfterViewInit {
 	private todoId: string;
+	private activeSpinner: boolean = false;
 
   constructor(
 		private dialog: MatDialog,
@@ -35,6 +36,7 @@ export class TodoDeleteComponent implements OnInit, AfterViewInit {
 		const dialogRef = this.dialog.open(ModalConfirmationComponent, {});
 
 		dialogRef.afterClosed().subscribe(result => {
+			this.activeSpinner = true;
 			if(result){
 				this.todoService.deleteTodoById(this.todoId).subscribe(
 					response => {
@@ -43,6 +45,9 @@ export class TodoDeleteComponent implements OnInit, AfterViewInit {
 					},
 					error => {
 						console.log(error);	
+					},
+					() => {
+						this.activeSpinner = false;
 					});
 			} else {
 				// how to avoid code duplicating

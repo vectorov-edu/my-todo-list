@@ -13,6 +13,7 @@ import { TodoDeleteComponent } from './components/todo-delete/todo-delete.compon
 import { ModalConfirmationComponent } from './components/modal-confirmation/modal-confirmation.component';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TodoRoutingModule,
     FormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ModalConfirmationComponent
